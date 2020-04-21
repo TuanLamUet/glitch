@@ -1,0 +1,11 @@
+form(action="/todos")
+  input(type="text" name="q")
+  button(type="submit") Search
+  
+form(action="/todos/create" method="POSt")
+  input(type="text" name="todo")
+  button(type="submit") Create
+  
+ul
+  each item in todos
+    li=item.todo
