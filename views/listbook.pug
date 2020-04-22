@@ -8,4 +8,6 @@ form(action="/todos/create" method="POSt")
   
 ul
   each item in todos
-    li=item.todo
+    li
+      span=item.todo
+      a(href="/todos/"+ item.id + "/delete") Xóa
