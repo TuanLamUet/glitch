@@ -1,12 +1,20 @@
 {
-  "todos": [
+  "books": [
     {
-      "id": "1",
-      "todo": "hello"
+      "title": "Javascript",
+      "description": "fasfsd"
     },
     {
-      "id": "2",
-      "todo": "my name name"
+      "title": "dfsafas",
+      "description": "dfsafas"
+    },
+    {
+      "title": "typescript super",
+      "description": "dfafda"
+    },
+    {
+      "title": "hello anh em",
+      "description": "không có gì"
     }
   ]
 }

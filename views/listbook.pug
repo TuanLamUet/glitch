@@ -1,13 +1,11 @@
-form(action="/todos")
-  input(type="text" name="q")
-  button(type="submit") Search
-  
-form(action="/todos/create" method="POSt")
-  input(type="text" name="todo")
-  button(type="submit") Create
+form(action="/add-new-book" method="POST")
+  input(name="title" type="text")
+  input(name="description" type="text")
+  button(type="submit") Thêm sách vào thư viện
   
 ul
-  each item in todos
+  each book in books
     li
-      span=item.todo
-      a(href="/todos/"+ item.id + "/delete") Xóa
+      span=book.title
+      a(href="/listbook/"+book.title+"/update-title") Sửa tên sách
+      a(href="/listbook/"+book.title+"/delete") Xóa
