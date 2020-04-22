@@ -5,33 +5,36 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
-// https://expressjs.com/en/starter/basic-routing.html
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+ 
+const adapter = new FileSync('db.json')
+const db = low(adapter);
+
+db.defaults({ todos:[] })
+  .write();
+
+
+app.set("views", "./views");
+app.set("view engine", "pug");
+
 app.get('/', (request, response) => {
   response.send('I love CodersX');
 });
-app.set("views", "./views");
-app.set("view engine", "pug");
 
 app.use(bodyParser.urlencoded({ extended: false }))
  
 app.use(bodyParser.json())
-
-let todos = [
-  { id: 1, todo: "Đi chợ" },
-  { id: 2, todo: "Nấu cơm" },
-  { id: 3, todo: "Rửa bát" },
-  { id: 4, todo: "Học code ở CodersX" }
-];
 
 
 app.get("/todos", (req, res) => {
   let q = req.query.q;
   
   if(q) {
-    let todosMatches = todos.filter(item => {
-    return item.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    let todosMatches = db.get('todos').value().filter(item => {
+    return item.todo.toLowerCase().indexOf(q.toLowerCase()) !== -1;
         });
     res.render("todos", {
       todos: todosMatches
@@ -39,7 +42,7 @@ app.get("/todos", (req, res) => {
   }
   else {
     res.render("todos", {
-      todos:todos
+      todos:db.get('todos').value(),
     })
   }
 
@@ -47,10 +50,16 @@ app.get("/todos", (req, res) => {
 
 app.post("/todos/create", (req, res) => {
   let todo = req.body;
-  todos.push(todo);
+  db.get('todos').push(todo).write();
   console.log(todo);
   return res.redirect('back');
-})
+});
+
+app.get("/todos/:id/delete", (req, res) => {
+  let id = req.params.id;
+  db.get('todos').remove({id}).write();
+  return res.redirect('/todos');
+}); 
 // listen for requests :)
 app.listen(process.env.PORT, () => {
   console.log("Server listening on port " + process.env.PORT);
