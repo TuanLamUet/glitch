@@ -4,6 +4,7 @@ dependencies:
   lowdb: 1.0.0
   nodemon: 2.0.3
   pug: 2.0.4
+  uuid: 7.0.3
 packages:
   /@sindresorhus/is/0.14.0:
     dev: false
@@ -1582,6 +1583,11 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+  /uuid/7.0.3:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
   /vary/1.1.2:
     dev: false
     engines:
@@ -1658,3 +1664,4 @@ specifiers:
   lowdb: ^1.0.0
   nodemon: ^2.0.3
   pug: ^2.0.4
+  uuid: ^7.0.3

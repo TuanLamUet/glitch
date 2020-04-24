@@ -7,62 +7,25 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
- 
-const adapter = new FileSync('db.json')
-const db = low(adapter);
-
-db.defaults({ books:[] })
-  .write();
-
+const bookRouter = require("./router/book.router");
+const userRouter = require("./router/user.router");
+const transactionRouter = require('./router/transaction.router');
 
 app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.get('/', (request, response) => {
-  response.send('I love CodersX'+'<br><a href="/listbook">My listbook</a>');
+  response.send('I love CodersX'+'<br><a href="/books">My List book</a><br><a href="/users">List User</a>');
 });
 
 app.use(bodyParser.urlencoded({ extended: false }))
  
 app.use(bodyParser.json())
 
-
-app.get('/listbook', (req, res) => {
-  res.render("listbook", {
-    books: db.get("books").value()
-  })
-});
-
-app.post("/add-new-book", (req, res) => {
-  let title = req.body.title;
-  let description = req.body.description;
-  db.get('books').push({title, description}).write()
-  return res.redirect('/listbook');
-});
-
-app.get("/listbook/:title/delete", (req, res) => {
-  let title = req.params.title;
-  db.get('books').remove({title}).write()
-  return res.redirect('/listbook');
-});
-
-app.get("/listbook/:title/update-title", (req, res) => {
-  let title = req.params.title;
-  return res.render("update-title.pug", {
-    title: title
-  })
-});
-
-app.post("/listbook/:title/update", (req, res) => {
-  let oldTitle = req.params.title;
-  let newTitle = req.body.title;
-  db.get('books').find({title: oldTitle}).assign({title: newTitle}).write();
-  return res.redirect("/listbook");
-})
-
+app.use("/books", bookRouter);
+app.use("/users", userRouter);
+app.use("/transactions", transactionRouter);
 // listen for requests :)
 app.listen(process.env.PORT, () => {
-  console.log("Server listening on port " + process.env.PORT);
+  console.log("Server listening on port " + process.env.PORT );
 });

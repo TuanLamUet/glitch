@@ -1,0 +1,11 @@
+h1 Tạo user mới
+form(action="/users/create" method="POST")
+  input(type="text" name="name" placeholder="Nhập tên user")
+  button(type="submit") Tạo
+
+ul
+  each user in users
+    li
+      span=user.name
+      a(href="/users/"+user.userId+"/update") Sửa
+      a(href="/users/"+user.userId+"/delete") Xóa

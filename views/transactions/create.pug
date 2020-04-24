@@ -1,0 +1,12 @@
+form(action="/transactions/create" method="POST")
+  h2 select user
+  select(name="userId")
+    each user in users
+      option(value=user.userId)=user.name
+
+  h2 select book
+  select(name="bookId")
+    each book in books
+      option(value=book.bookId)=book.title
+
+  button(type="submit") Create
