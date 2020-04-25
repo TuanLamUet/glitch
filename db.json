@@ -1,5 +1,22 @@
 {
-  "books": [],
+  "books": [
+    {
+      "title": "Javascript",
+      "description": "fasfsd"
+    },
+    {
+      "title": "dfsafas",
+      "description": "dfsafas"
+    },
+    {
+      "title": "typescript super",
+      "description": "dfafda"
+    },
+    {
+      "title": "hello anh em",
+      "description": "không có gì"
+    }
+  ],
   "users": [
     {
       "userId": "f11681ee-7b6e-4fe1-a668-4aad66a6191b",
@@ -17,6 +34,5 @@
       "userId": "77ffbf2b-bc36-4e16-9691-a7f2bdc5ab7a",
       "name": "anh đi đâu đấy"
     }
-  ],
-  "transactions": []
+  ]
 }

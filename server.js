@@ -15,7 +15,7 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.get('/', (request, response) => {
-  response.send('I love CodersX'+'<br><a href="/books">My List book</a><br><a href="/users">List User</a>');
+  response.send('I love CodersX'+'<br><a href="/books">My List book</a><br><a href="/users">List User</a><br><a href="/transactions/create>transactions</a>');
 });
 
 app.use(bodyParser.urlencoded({ extended: false }))
