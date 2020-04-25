@@ -1,3 +1,5 @@
 ul
   each transaction in transactions
-    li=transaction.transId
+    li
+      span=transaction.transId
+      a(href="/transactions/"+ transaction.transId +"/complete") Hoàn thành

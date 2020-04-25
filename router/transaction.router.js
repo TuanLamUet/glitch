@@ -1,24 +1,13 @@
 const router = require('express').Router();
 
-const db = require('../db.js');
+const transactionController = require('../controller/transactions.controller');
 
-router.get('/', (req, res) => {
-  return res.render("transactions/index", {
-    transactions: db.get("transactions").value()
-  })
-});
+router.get('/', transactionController.getAllTransactions);
 
-router.get('/create', (req, res) => {
-  return res.render("transactions/create", {
-    users: db.get('users').value(),
-    books: db.get('books').value(),
-  });
-});
+router.get('/create',transactionController.createNewTransactionPage);
 
-router.post('/create', (req, res) => {
-  db.get('transactions').push({transId: uuid(),bookId: req.body.bookId, userId: req.body.userId  }).write();
-  return res.redirect("/transactions/create");  
-});
+router.get('/:transId/complete', transactionController.Complete);
 
+router.post('/create', transactionController.createNewTransaction);
 
 module.exports = router;
